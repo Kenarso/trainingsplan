@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-Jugend Handball · Trainingsplan 2026/27</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy2:#112236;--navy3:#162d47;--navy4:#1d3a58;
+  --orange:#FF5722;--orange-lt:#ff7043;
+  --teal:#00BFA5;--teal-dk:#00897B;
+  --amber:#FFB300;--amber-dk:#F57F17;
+  --coral:#FF6B6B;--coral-dk:#c62828;
+  --violet:#9C27B0;--violet-dk:#6A1B9A;
+  --text:#e8f0fe;--text-muted:#8baac8;--text-dim:#4a6d8c;
+  --card-bg:rgba(255,255,255,0.04);--card-border:rgba(255,255,255,0.08);
+  --radius:10px;
+}
+body{font-family:'Barlow',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+a{color:var(--orange);text-decoration:none}
+
+/* LAYOUT */
+.shell{display:flex;min-height:100vh}
+.sidebar{width:270px;background:var(--navy2);border-right:1px solid var(--card-border);position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;padding-bottom:2rem}
+.main{flex:1;overflow-x:hidden;padding:2rem 2.5rem 4rem}
+
+/* SIDEBAR */
+.sidebar-header{padding:1.5rem 1.25rem 1rem;border-bottom:1px solid var(--card-border)}
+.sidebar-header h1{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;line-height:1.2}
+.sidebar-header p{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
+.phase-group{margin:.5rem 0}
+.phase-label{padding:.6rem 1.25rem .3rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim)}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.45rem 1.25rem;cursor:pointer;font-size:.82rem;color:var(--text-muted);transition:background .15s,color .15s;border-left:3px solid transparent}
+.nav-item:hover{background:var(--card-bg);color:var(--text)}
+.nav-item.active{color:var(--text);background:rgba(255,87,34,.1);border-left-color:var(--orange)}
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.phase-overview-item{padding:.45rem 1.25rem;cursor:pointer;font-size:.82rem;color:var(--text-muted);transition:.15s;border-left:3px solid transparent}
+.phase-overview-item:hover{background:var(--card-bg);color:var(--text)}
+.phase-overview-item.active{color:var(--text);background:rgba(255,87,34,.1);border-left-color:var(--orange)}
+
+/* HEADER */
+.page-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--card-border)}
+.breadcrumb{font-size:.75rem;color:var(--text-dim);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.page-header h2{font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.1;color:var(--text)}
+.phase-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-top:.6rem}
+.meta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem}
+.meta-chip{display:flex;align-items:center;gap:.4rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:.3rem .7rem;font-size:.78rem;color:var(--text-muted)}
+.meta-chip span{color:var(--text);font-weight:500}
+
+/* SEASONAL OVERVIEW */
+.season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.season-phase-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:1.25rem;border-top:3px solid transparent;cursor:pointer;transition:.15s}
+.season-phase-card:hover{background:rgba(255,255,255,0.06)}
+.season-phase-card h3{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.25rem}
+.season-phase-card .date{font-size:.75rem;color:var(--text-muted);margin-bottom:.6rem}
+.season-phase-card .weeks{font-size:.78rem;color:var(--text)}
+.phase-stat{display:flex;justify-content:space-between;margin-top:.5rem;font-size:.75rem;color:var(--text-dim)}
+
+/* WEEK DISPLAY */
+.week-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.week-focus-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.focus-tag{padding:.2rem .6rem;border-radius:4px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+
+.sessions-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+@media(max-width:900px){.sessions-grid{grid-template-columns:1fr}}
+
+.session-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden}
+.session-header{padding:.75rem 1rem;border-bottom:1px solid var(--card-border);display:flex;align-items:center;justify-content:space-between}
+.session-header h4{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.session-time{font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,0.05);padding:.15rem .5rem;border-radius:4px}
+
+.block{padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.block:last-child{border-bottom:none}
+.block-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.block-icon{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.block-title{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
+.block-dur{margin-left:auto;font-size:.68rem;color:var(--text-dim);background:var(--card-bg);padding:.1rem .4rem;border-radius:3px}
+.block-content{font-size:.82rem;line-height:1.55;color:var(--text)}
+.block-content li{margin-left:1rem;margin-top:.15rem}
+
+.diff-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.4rem}
+.diff-box{border-radius:6px;padding:.5rem .7rem}
+.diff-box .diff-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.diff-box ul{list-style:none;font-size:.78rem;line-height:1.5}
+.diff-box ul li::before{content:"→ ";color:inherit;opacity:.7}
+
+.gruppe-a{background:rgba(0,191,165,.08);border:1px solid rgba(0,191,165,.2)}
+.gruppe-a .diff-label{color:var(--teal)}
+.gruppe-b{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.2)}
+.gruppe-b .diff-label{color:var(--amber)}
+
+.hinweis{background:rgba(255,87,34,.07);border-left:2px solid var(--orange);padding:.4rem .7rem;border-radius:0 5px 5px 0;margin-top:.4rem;font-size:.78rem;color:#ffab91}
+.hinweis strong{color:var(--orange)}
+
+/* PHASE OVERVIEW PAGE */
+.weeks-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.week-summary-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;transition:.15s;border-left:3px solid transparent}
+.week-summary-card:hover{background:rgba(255,255,255,0.06);border-left-color:var(--orange)}
+.week-summary-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.2rem}
+.week-summary-card .wdate{font-size:.72rem;color:var(--text-dim);margin-bottom:.4rem}
+.week-summary-card .focus-list{font-size:.78rem;color:var(--text-muted)}
+
+/* PHASE STRUCTURE TABLE */
+.structure-table{width:100%;border-collapse:collapse;margin-bottom:2rem}
+.structure-table th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);padding:.5rem .75rem;border-bottom:1px solid var(--card-border);font-weight:600}
+.structure-table td{padding:.55rem .75rem;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.structure-table tr:hover td{background:var(--card-bg)}
+
+/* OVERVIEW PAGE */
+.overview-hero{background:linear-gradient(135deg,rgba(255,87,34,.12) 0%,rgba(0,191,165,.08) 100%);border:1px solid rgba(255,87,34,.2);border-radius:var(--radius);padding:1.5rem 2rem;margin-bottom:2rem}
+.overview-hero h2{font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;font-weight:900;color:var(--orange);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.overview-hero p{color:var(--text-muted);margin-top:.5rem;max-width:600px}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.75rem;margin:1.5rem 0}
+.stat-box{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:.8rem 1rem;text-align:center}
+.stat-box .num{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;color:var(--text)}
+.stat-box .lbl{font-size:.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-top:.1rem}
+
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:1.25rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem;color:var(--text-muted)}
+
+/* PHASETIMELINE */
+.timeline{position:relative;padding-left:1.5rem;margin-bottom:2rem}
+.timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:1px;background:var(--card-border)}
+.tl-item{position:relative;margin-bottom:1.25rem}
+.tl-dot{position:absolute;left:-1.5rem;top:.35rem;width:10px;height:10px;border-radius:50%;border:2px solid var(--navy)}
+.tl-content{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:.8rem 1rem}
+.tl-content h4{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.15rem}
+.tl-content .tl-date{font-size:.72rem;color:var(--text-dim)}
+.tl-content p{font-size:.82rem;color:var(--text-muted);margin-top:.3rem}
+
+/* PRINT */
+@media print{
+  .sidebar{display:none}
+  .main{padding:1rem}
+  .session-card{break-inside:avoid}
+  body{background:#fff;color:#000}
+}
+
+/* SCROLL */
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:2px}
+
+/* PAUSE CARD */
+.pause-card{background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.12);border-radius:var(--radius);padding:1.5rem;text-align:center;color:var(--text-muted)}
+.pause-card h3{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-dim);margin-bottom:.4rem}
+
+  .pdf-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--orange);color:#fff;
+    border:none;border-radius:6px;padding:.4rem .9rem;font-size:.78rem;font-weight:600;
+    cursor:pointer;text-decoration:none;transition:.15s;margin:0}
+  .pdf-btn:hover{background:#ff7043;color:#fff}
+  .pdf-strip{background:rgba(255,87,34,.08);border:1px solid rgba(255,87,34,.2);
+    border-radius:8px;padding:.65rem 1rem;margin-bottom:1.2rem;display:flex;
+    align-items:center;gap:.8rem;flex-wrap:wrap}
+  .pdf-strip p{font-size:.8rem;color:var(--text-muted);margin:0;flex:1}
+
+
+  .regel-box{background:rgba(2,119,189,.1);border:1px solid rgba(2,119,189,.4);
+    border-left:4px solid #0277BD;border-radius:8px;padding:.8rem 1rem;
+    margin-bottom:1.2rem;font-size:.82rem;color:#B3E5FC}
+  .regel-box strong{color:#4FC3F7;display:block;margin-bottom:.3rem;font-size:.78rem;
+    text-transform:uppercase;letter-spacing:.06em}
+  .regel-box.warn{background:rgba(229,57,53,.08);border-color:rgba(229,57,53,.4);
+    border-left-color:#E53935;color:#FFCDD2}
+  .regel-box.warn strong{color:#EF9A9A}
+
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h1>🤾 D-Jugend Handball</h1>
+    <p>Trainingsplan · Saison 2026/27</p>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label">Start</div>
+    <div class="nav-item active" onclick="show('overview')" id="nav-overview">
+      <div class="nav-dot" style="background:#FF5722"></div>Saisonübersicht
+    </div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:var(--teal)">Phase 1 · Aufbau</div>
+    <div class="nav-item" onclick="show('p1-overview')" id="nav-p1-overview">
+      <div class="nav-dot" style="background:var(--teal)"></div>Phasenübersicht
+    </div>
+    <div class="nav-item" onclick="show('w1')" id="nav-w1"><div class="nav-dot" style="background:var(--teal)"></div>W1 · Kennenlernen</div>
+    <div class="nav-item" onclick="show('w2')" id="nav-w2"><div class="nav-dot" style="background:var(--teal)"></div>W2 · Passspiel</div>
+    <div class="nav-item" onclick="show('w3')" id="nav-w3"><div class="nav-dot" style="background:var(--teal)"></div>W3 · Schlagwurf</div>
+    <div class="nav-item" onclick="show('w4')" id="nav-w4"><div class="nav-dot" style="background:var(--teal)"></div>W4 · Sprungwurf</div>
+    <div class="nav-item" onclick="show('w5')" id="nav-w5"><div class="nav-dot" style="background:var(--teal)"></div>W5 · Schnellangriff</div>
+    <div class="nav-item" onclick="show('w6')" id="nav-w6"><div class="nav-dot" style="background:var(--teal)"></div>W6 · Kreis & Rückraum</div>
+    <div class="nav-item" onclick="show('w7')" id="nav-w7"><div class="nav-dot" style="background:var(--teal)"></div>W7 · Kombinationen & 1:5</div>
+    <div class="nav-item" onclick="show('w8')" id="nav-w8"><div class="nav-dot" style="background:var(--teal)"></div>W8 · Miniturnier</div>
+    <div class="nav-item" onclick="show('w9')" id="nav-w9"><div class="nav-dot" style="background:var(--teal)"></div>W9 · Positionen & 1:5</div>
+    <div class="nav-item" onclick="show('w10')" id="nav-w10"><div class="nav-dot" style="background:var(--teal)"></div>W10 · Abschluss P1</div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:#888">Sommerpause</div>
+    <div class="nav-item" onclick="show('sommerpause')" id="nav-sommerpause"><div class="nav-dot" style="background:#555"></div>RLP Schulferien</div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:var(--amber)">Phase 2 · Vorbereitung</div>
+    <div class="nav-item" onclick="show('p2')" id="nav-p2"><div class="nav-dot" style="background:var(--amber)"></div>W11–14 · Saisonvorbereitung</div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:var(--coral)">Phase 3 · Hinrunde</div>
+    <div class="nav-item" onclick="show('p3')" id="nav-p3"><div class="nav-dot" style="background:var(--coral)"></div>W15–27 · Hauptsaison</div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:#888">Winterpause</div>
+    <div class="nav-item" onclick="show('winterpause')" id="nav-winterpause"><div class="nav-dot" style="background:#555"></div>Weihnachten/Neujahr</div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-label" style="color:var(--violet)">Phase 4 · Rückrunde</div>
+    <div class="nav-item" onclick="show('p4')" id="nav-p4"><div class="nav-dot" style="background:var(--violet)"></div>W28–44 · Finale</div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview">
+  <div class="overview-hero">
+    <h2>Saison 2026/27</h2>
+    <p>Strategischer Trainingsplan · D-Jugend Handball · 30 Spieler · 2 Einheiten/Woche à 90 Min.</p>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="num">30</div><div class="lbl">Spieler</div></div>
+    <div class="stat-box"><div class="num">2×</div><div class="lbl">Training/Woche</div></div>
+    <div class="stat-box"><div class="num">90'</div><div class="lbl">je Einheit</div></div>
+    <div class="stat-box"><div class="num">~44</div><div class="lbl">Trainingswochen</div></div>
+    <div class="stat-box"><div class="num">~176</div><div class="lbl">Trainingsstunden</div></div>
+    <div class="stat-box"><div class="num">2 Gr.</div><div class="lbl">Differenzierung</div></div>
+  </div>
+
+  <div class="section-title">Saisonstruktur im Überblick</div>
+  <div class="season-grid">
+    <div class="season-phase-card" style="border-top-color:var(--teal)" onclick="show('p1-overview')">
+      <h3 style="color:var(--teal)">Phase 1 · Aufbau</h3>
+      <div class="date">19. Mai – 10. Juli 2026</div>
+      <div class="weeks">10 Wochen · 20 Einheiten</div>
+      <div class="phase-stat"><span>Fokus</span><span style="color:var(--teal)">Grundlagen + Diagnose</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:#888;cursor:default">
+      <h3 style="color:#555">🌸 Pfingstferien RLP</h3>
+      <div class="date">26. Mai – 5. Juni 2026</div>
+      <div class="weeks">Betrifft W2 (26. Mai) und W3 (2. Juni)!</div>
+      <div class="phase-stat"><span>Hinweis</span><span style="color:#777">Trainings ggf. verschieben</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:#444;cursor:default">
+      <h3 style="color:#555">☀ Sommerpause</h3>
+      <div class="date">ca. 13. Juli – 21. Aug 2026</div>
+      <div class="weeks">5,5 Wochen Rheinland-Pfalz Sommerferien</div>
+      <div class="phase-stat"><span>Aufgaben</span><span style="color:#555">Fitness-Karten</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:var(--amber)" onclick="show('p2')">
+      <h3 style="color:var(--amber)">Phase 2 · Vorbereitung</h3>
+      <div class="date">24. Aug – 18. Sep 2026</div>
+      <div class="weeks">4 Wochen · 8 Einheiten</div>
+      <div class="phase-stat"><span>Fokus</span><span style="color:var(--amber)">Intensivierung + Systeme</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:var(--coral)" onclick="show('p3')">
+      <h3 style="color:var(--coral)">Phase 3 · Hinrunde</h3>
+      <div class="date">21. Sep – 19. Dez 2026</div>
+      <div class="weeks">13 Wochen · 26 Einheiten</div>
+      <div class="phase-stat"><span>Fokus</span><span style="color:var(--coral)">Wettkampf + Taktik</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:#444;cursor:default">
+      <h3 style="color:#555">❄ Winterpause</h3>
+      <div class="date">22. Dez 2026 – 8. Jan 2027</div>
+      <div class="weeks">~3 Wochen Erholung</div>
+      <div class="phase-stat"><span>Aufgaben</span><span style="color:#555">Regeneration</span></div>
+    </div>
+    <div class="season-phase-card" style="border-top-color:var(--violet)" onclick="show('p4')">
+      <h3 style="color:var(--violet)">Phase 4 · Rückrunde</h3>
+      <div class="date">11. Jan – 15. Mai 2027</div>
+      <div class="weeks">17 Wochen · 34 Einheiten</div>
+      <div class="phase-stat"><span>Fokus</span><span style="color:var(--violet)">Leistungspeak + Finale</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Trainingsstruktur je Einheit (90 Min.)</div>
+  <table class="structure-table">
+    <thead><tr><th>Block</th><th>Zeit</th><th>Inhalt</th><th>Methode</th></tr></thead>
+    <tbody>
+      <tr><td>Aufwärmen</td><td>15 Min.</td><td>Koordination, Spiele, Dehnen dynamisch</td><td>Gemeinsam alle 30</td></tr>
+      <tr><td>Hauptteil 1</td><td>25 Min.</td><td>Technik / Schwerpunkt des Tages</td><td><strong>Differenziert:</strong> Gruppe A + Gruppe B</td></tr>
+      <tr><td>Hauptteil 2</td><td>25 Min.</td><td>Taktik / Abwehr / Spielform</td><td>Zunehmend gemeinsam</td></tr>
+      <tr><td>Kondition</td><td>15 Min.</td><td>Kraft, Ausdauer oder Spielform</td><td>Teams oder individuell</td></tr>
+      <tr><td>Cool-down</td><td>10 Min.</td><td>Dehnen, Reflexion, Ankündigung</td><td>Gemeinsam alle 30</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Differenzierungskonzept (50% Leistungsgefälle)</div>
+  <div class="diff-row" style="margin-bottom:1.5rem">
+    <div class="diff-box gruppe-a">
+      <div class="diff-label">Gruppe A · Fortgeschrittene (~15 Spieler)</div>
+      <ul>
+        <li>Komplexere Übungsformen, höheres Tempo</li>
+        <li>Kombinationstraining, Taktik früher einführen</li>
+        <li>Sprungwurf, Finten, Systemtaktik</li>
+        <li>Peer-Coaching: Gruppe A unterstützt Gruppe B in Spielformen</li>
+      </ul>
+    </div>
+    <div class="diff-box gruppe-b">
+      <div class="diff-label">Gruppe B · Grundlagen (~15 Spieler)</div>
+      <ul>
+        <li>Vereinfachte Übungsformen, mehr Wiederholungen</li>
+        <li>Technikgrundlagen konsequent festigen</li>
+        <li>Schlagwurf, sicheres Prellen, einfache Pässe</li>
+        <li>Positive Verstärkung, kein Leistungsdruck</li>
+      </ul>
+    </div>
+  </div>
+  <div class="regel-box warn"><strong>⚠ HVRP / DHB Pflichtabwehr D-Jugend</strong>In der D-Jugend ist ausschließlich offensives Abwehrspiel erlaubt. Passive Raumdeckungen wie <strong>6:0, tiefes 5:1 oder 4:2 sind verboten</strong> und werden vom Schiedsrichter abgepfiffen. Vorgeschrieben ist die <strong>1:5-Abwehr</strong>: 1 Verteidiger greift den Ballführenden aktiv an (außerhalb 9m), 5 dahinter spielen mann-orientiert – keine passive Linie an der 6m-Linie. Grundaufstellung aller Verteidiger innerhalb der Nahwurfzone ist ausdrücklich untersagt. Dieser Trainingsplan ist vollständig auf die 1:5-Pflichtabwehr ausgerichtet.</div>
+<div class="hinweis"><strong>Wichtig:</strong> Gruppen sind nicht starr – Spieler wechseln je nach Fortschritt. Ab Phase 2 werden die Gruppen teilweise aufgelöst, da sich das Niveau angleicht. Ziel: Am Saisonende spielen alle nach gleichem Grundsystem.</div>
+</section>
+
+<!-- ===== PHASE 1 OVERVIEW ===== -->
+<section id="p1-overview" style="display:none">
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1</div>
+    <h2>Aufbauphase</h2>
+    <div class="phase-badge" style="background:rgba(0,191,165,.15);color:var(--teal);border:1px solid rgba(0,191,165,.3)">🌱 Grundlagen · Mai – Juli 2026</div>
+    <div class="meta-row">
+      <div class="meta-chip">Wochen <span>1–10</span></div>
+      <div class="meta-chip">Start <span>19. Mai 2026</span></div>
+      <div class="meta-chip">Ende <span>ca. 10. Juli 2026</span></div>
+      <div class="meta-chip">Einheiten <span>20 à 90 Min.</span></div>
+    </div>
+  </div>
+  <div class="section-title">Phasenziele</div>
+  <div class="diff-row" style="margin-bottom:1.5rem">
+    <div class="diff-box gruppe-a">
+      <div class="diff-label" style="color:var(--teal)">Technische Ziele</div>
+      <ul>
+        <li>Sicherer Schlagwurf für alle</li>
+        <li>Einführung Sprungwurf (Gr. A sicher, Gr. B Grundform)</li>
+        <li>Pässe: Schulter-, Boden-, Druckpass</li>
+        <li>Dribbling beidhändig</li>
+      </ul>
+    </div>
+    <div class="diff-box gruppe-b">
+      <div class="diff-label" style="color:var(--amber)">Taktische & konditionelle Ziele</div>
+      <ul>
+        <li>1:5-Abwehr verstehen und konsequent anwenden (HVRP Pflicht)</li>
+        <li>Schnellangriff Grundprinzip</li>
+        <li>Ausdauer: 10-Min.-Lauf ohne Unterbrechung</li>
+        <li>Positionsgrundverständnis</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-title">Wochenübersicht Phase 1</div>
+  <div class="weeks-list">
+    <div class="week-summary-card" onclick="show('w1')"><h4>Woche 1 · 19. Mai</h4><div class="wdate">KW 21 · Trainingsstart</div><div class="focus-list">Kennenlernen · Diagnose-Stationen · Abwehr-Grundhaltung</div></div>
+    <div class="week-summary-card" onclick="show('w2')"><h4>Woche 2 · 26. Mai</h4><div class="wdate">KW 22 · ⚠ Pfingstferien RLP (26.5.–5.6.)</div><div class="focus-list">Passspiel & Laufwege · 1:1-Abwehr aktiv · Intervallläufe</div></div>
+    <div class="week-summary-card" onclick="show('w3')"><h4>Woche 3 · 2. Juni</h4><div class="wdate">KW 23 · ⚠ Pfingstferien RLP (noch bis 5.6.)</div><div class="focus-list">Schlagwurf vertieft · Finte einführen · 2:2 im 1:5-Kontext</div></div>
+    <div class="week-summary-card" onclick="show('w4')"><h4>Woche 4 · 9. Juni</h4><div class="wdate">KW 24</div><div class="focus-list">Sprungwurf-Einführung · 1:5-Abwehr Einführung (HVRP Pflicht) · Zuspiel Kreis</div></div>
+    <div class="week-summary-card" onclick="show('w5')"><h4>Woche 5 · 16. Juni</h4><div class="wdate">KW 25</div><div class="focus-list">Schnellangriff organisiert · 1:5-Rotation &amp; Kommunikation · Außenangriff</div></div>
+    <div class="week-summary-card" onclick="show('w6')"><h4>Woche 6 · 23. Juni</h4><div class="wdate">KW 26</div><div class="focus-list">Kreisspieler speziell · Rückraum-Koordination · Passspiel unter Druck</div></div>
+    <div class="week-summary-card" onclick="show('w7')"><h4>Woche 7 · 30. Juni</h4><div class="wdate">KW 27</div><div class="focus-list">3:3-Kombinationen · 1:5-Kommunikation &amp; Übergaben · Wurfvarianten</div></div>
+    <div class="week-summary-card" onclick="show('w8')"><h4>Woche 8 · 7. Juli</h4><div class="wdate">KW 28</div><div class="focus-list">Leistungsüberprüfung · Internes Miniturnier · Feedback</div></div>
+    <div class="week-summary-card" onclick="show('w9')"><h4>Woche 9 · ggf. 14. Juli</h4><div class="wdate">KW 29</div><div class="focus-list">Positionstraining beginnt · 1:5-Positionsrollen · Kombinationen</div></div>
+    <div class="week-summary-card" onclick="show('w10')"><h4>Woche 10 · Abschluss</h4><div class="wdate">KW 30</div><div class="focus-list">Zusammenfassung · Hausaufgaben Ferien · Abschlussturnier</div></div>
+  </div>
+</section>
+
+<!-- ===== WEEK PAGES ===== -->
+
+<!-- W1 -->
+<section id="w1" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 1 – Kennenlernen & Diagnose</strong> &nbsp;·&nbsp; 4 Seiten inkl. Auswertungsbogen &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W01_Woche01_Kennenlernen_und_Diagnose.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 1 · 19. Mai 2026</div>
+    <h2>Kennenlernen & Diagnose</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Diagnose</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Ballgewöhnung</span>
+      <span class="focus-tag" style="background:rgba(255,87,34,.15);color:var(--orange)">1:5-Abwehr Grundhaltung</span>
+    </div>
+    <div class="meta-row">
+      <div class="meta-chip">Ziel <span>Leistungsstand feststellen, Gruppen einteilen</span></div>
+      <div class="meta-chip">Besonderheit <span>Diagnose-Stationen → Gruppenbildung</span></div>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">
+          <b>„Namensspiel mit Ball":</b> Alle im Kreis, Ball zuwerfen + Namen des Empfängers rufen. 3 Runden.<br>
+          → Fangspiel <b>„Hai-Angriff"</b>: 3 Fänger ohne Ball, Rest mit Ball am Dribbling – wer gefangen wird, gibt Ball ab.
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Diagnose-Stationen (alle 30 gemeinsam)</div><div class="block-dur">30 Min.</div></div>
+        <div class="block-content">
+          4 Stationen à 7 Min., Gruppen à 7–8 Spieler rotieren:<br><br>
+          <b>St. 1 – Wurftest:</b> Torwurf aus 7m. Trainer beobachtet Technik & Kraft (nicht Ergebnis!).<br>
+          <b>St. 2 – Dribbling-Parcours:</b> Hütchenslalom (5 Kegel, 1m Abstand), links + rechts.<br>
+          <b>St. 3 – Passtest:</b> Pässe gegen Wand aus 5m, 30 Sek. – Technik + Anzahl zählen.<br>
+          <b>St. 4 – Koordination:</b> Einbeinstand 10 Sek., danach Balanceübung (Augen zu).<br><br>
+          <div class="hinweis"><strong>Trainer:</strong> Beobachtungsbogen führen. Nach dieser Einheit: grobe Einteilung Gruppe A / Gruppe B für Einheit 2. Kein Ranking kommunizieren – neutral beobachten.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Offensive Abwehr-Grundhaltung (1:5)</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <b>Erklärung offensive 1:5-Grundhaltung (HVRP Pflicht):</b><div class="regel-box"><strong>ℹ HVRP Regelhinweis</strong>Pflichtabwehr D-Jugend: ausschließlich 1:5 – offensiv, mann-orientiert. Passive Raumdeckungen (6:0, 4:2) sind verboten und werden vom SR abgepfiffen!</div>(1) Knie gebeugt – bereit zum Sprint, (2) breiter Stand, (3) Hände aktiv oben!<br><br>
+          <b>Ü1 – Einfrieren:</b> Trainer pfeift → alle nehmen <em>offensive</em> 1:5-Abwehrposition ein (kein passives Stehen!). Individuell korrigieren (3×).<br>
+          <b>Ü2 – Schattenverteidigung:</b> Paare. A dribbelt frei in der Halle, B folgt wie ein Schatten (kein Körperkontakt). Wechsel nach 30 Sek.<br>
+          <b>Ü3 – Schiebeschritt:</b> Alle in Linie. Trainer gibt Richtung vor (Klatschen li/re). Laterale Schiebetritte – explosiv rausgehen! 3×45 Sek.
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition</div><div class="block-dur">10 Min.</div></div>
+        <div class="block-content">
+          2× Shuttle-Run: 10m → 20m → 30m (Sprint hin + zurück, kurze Pause zwischen den Runden).<br>
+          Ziel: Basiswert ermitteln (informell notieren).
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down & Reflexion</div><div class="block-dur">10 Min.</div></div>
+        <div class="block-content">Dehnen in Gruppen à 5. Gespräch: <i>„Was war heute neu für euch?"</i> Ausblick: Nächstes Training mit festen Gruppen.</div>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">Koordinationsleiter: vorwärts, seitwärts, einbeinig (je 3 Durchläufe).<br>Danach: Hütchenslalom + 10m-Sprint abschließend.</div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Erste Ballgewöhnung</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A – Fortgeschrittene</div>
+              <ul>
+                <li>Pässe zu dritt im Dreieck mit Laufweg: nach Pass hinter den nächsten stellen</li>
+                <li>Einführung 3-er Rhythmus: Schritt re. → li. → Sprung (ohne Wurfabschluss)</li>
+                <li>Übungsform: 2 Pässe, dann Torwurf auf leeres Tor</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B – Grundlagen</div>
+              <ul>
+                <li>Einzelarbeit: Ball prellen mit rechts 30 Sek., links 30 Sek., Wechsel</li>
+                <li>Einfacher Schulterwurf gegen Wand aus 4m (Ellenbogen oben!)</li>
+                <li>Pässe zu zweit: 4m Abstand, Fang mit beiden Händen sicherstellen</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Hinweis Gr. A:</strong> Qualität des Rhythmus wichtiger als Tempo. <strong>Gr. B:</strong> Jede Technik erst korrekt zeigen, dann üben – keine Fehler einschleifen.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Einführung Schnellangriff</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <b>Konzept erklären</b> (3 Min.): Warum schnell spielen? Überzahl nutzen, bevor Gegner zurück ist.<br><br>
+          <b>Ü1 – 3:0 auf leeres Tor:</b> 3 Spieler starten an Mittellinie, 1 Pass, 1 Abschluss. Alle 30 spielen in 3er-Gruppen nacheinander.<br>
+          <b>Ü2 – 3:1 (nur Torwart):</b> Kommunikation: Wer wirft? Wer passt zum Freistehenden?<br>
+          <div class="hinweis"><strong>Trainer:</strong> Konkret loben, wenn ein Spieler den Freistehenden findet – das ist das Lernziel, nicht das Tor selbst.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Ausdauer-Grundlage</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">2× 5 Min. Dauerlauf (Hallenparcours, lockeres „Plaudertempo"). 2 Min. Pause dazwischen.<br>Ziel: Alle können 5 Min. ohne Unterbrechung laufen – Ausgangswert für die Saison.</div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div>
+        <div class="block-content">Dehnen. Ankündigung: Ab heute sind Gruppen A und B fix. Keine Wertung – nur für besseres Training.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- W2 -->
+<section id="w2" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 2 – Passspiel & Laufwege</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W02_Woche02_Passspiel_und_Laufwege.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 2 · 26. Mai 2026</div>
+    <h2>Passspiel & Laufwege</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Technik Pässe</span>
+      <span class="focus-tag" style="background:rgba(255,87,34,.15);color:var(--orange)">1:1-Abwehr aktiv</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Ausdauer-Intervall</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">Partneraufwärmen: je 2 Spieler, gemeinsam laufen + dynamisches Dehnen (Ausfallschritte, Arm-Kreisen). Abschluss: Pässe beim Laufen zu zweit quer durch die Halle.</div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Passtechnik</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A – Fortgeschrittene</div>
+              <ul>
+                <li>Druckpass mit Ausfallschritt (Gewicht auf Wurfseite vorne)</li>
+                <li>Tiefpass (Bodenwurf) einführen: Ball auftippen lassen</li>
+                <li>Übungsform: 2:1-Angriff auf kleines Tor – nach 2 Pässen Abschluss</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B – Grundlagen</div>
+              <ul>
+                <li>Schulterwurf-Mechanik: Ellenbogen auf Schulterhöhe, Handgelenk snappen</li>
+                <li>1:1-Pässe auf 5m, Trainer korrigiert Fingerstellung und Stand</li>
+                <li>Übungsform: Pässe zu zweit, nach jedem Fang: kleiner Schritt zurück (Abstand erhöhen)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Hinweis Gr. A:</strong> Entscheidungstraining – wann tiefe, wann hohe Pässe? <strong>Gr. B:</strong> Qualität über Tempo, lieber langsam und richtig als schnell und falsch.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:1-Abwehr aktiv (Fundament der 1:5)</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <b>Aufbau:</b> Angreifer startet an 9m, Verteidiger an 6m-Linie.<br><br>
+          <b>Ü1:</b> Angreifer will bis 6m vordringen, Verteidiger verhindert mit Beinarbeit (kein Körperkontakt, nur Positionsspiel). 30 Sek., dann Wechsel.<br>
+          <b>Ü2:</b> Gleich, aber Angreifer darf jetzt zum Kreis passen – Verteidiger muss Durchbruch UND Querpass verhindern.<br>
+          <div class="hinweis"><strong>Kernsatz 1:5:</strong> "Den Ballführenden aktiv angreifen – nie abwarten!" Die 1:1-Kompetenz ist das Fundament der 1:5-Pflichtabwehr im HVRP.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Intervallläufe</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">
+          6× 200m (= 4× Hallenlänge je Einheit) mit 45 Sek. Pause.<br>
+          Danach: 3× 10 Liegestütze (Anfänger: auf Knien erlaubt, kommunizieren ohne Stigma).
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen + kurzes Feedback: Was war bei der Abwehr schwierig?</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content"><b>„Tikka-Taka-Aufwärmen":</b> 5 vs. 5 auf kleinem Feld, nur Pässe (kein Dribbling), kein Tor – Ballbesitz halten. 2× 4 Min. mit kurzem Wechsel.</div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Laufwege nach dem Pass</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Kreuzlaufpässe: 2 Spieler laufen aufeinander zu, tauschen den Ball in der Mitte</li>
+                <li>Anspiel + Gegenlauf: A passt zu B, A läuft hinter B vorbei zum Tor</li>
+                <li>Übungsform: 3er-Kette mit Laufweg-Auflösung zum Abschluss</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Grundregel einführen: nach jedem Pass → 3 schnelle Schritte in neue Richtung</li>
+                <li>Übungsform: 3er-Reihe passen + immer in Richtung freier Raum laufen</li>
+                <li>Stillstand nach Pass aktiv korrigieren</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Lernziel der Woche:</strong> „Steh nie still nach einem Pass!" – Dieser Satz soll automatisiert werden.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Torwurf-Stationen</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          3 Stationen (je 10 Spieler, 8 Min. rotieren):<br><br>
+          <b>St. 1 – Rückraum Mitte:</b> Schlagwurf aus 9m, Fokus: Anlaufschritte + Wurfbewegung.<br>
+          <b>St. 2 – Außenposition:</b> Schulterwurf aus 7m (Außen links UND rechts je 4 Würfe).<br>
+          <b>St. 3 – Kreis:</b> Annahme auf 6m + Standwurf / einfacher Drehwurf. Pässe vom Trainer oder Mitspieler.<br>
+          Torwart (falls vorhanden): nach 5 Würfen wechseln.
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Koordinationsparcours</div><div class="block-dur">15 Min.</div></div>
+        <div class="block-content">Aufbau: Hütchenslalom → Einbeinstand 5 Sek. → Doppelsprünge (Hürdenparcours) → 10m-Sprint.<br>2 Runden, kurze Verschnaufpause dazwischen. Wettbewerb optional.</div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen, Woche 3 ankündigen: Schlagwurf-Vertiefung + Finten.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W3 -->
+<section id="w3" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 3 – Schlagwurf & 2:2 im 1:5-Kontext</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W03_Woche03_Schlagwurf_und_22-Abwehr_im_15-System.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 3 · 2. Juni 2026</div>
+    <h2>Schlagwurf & 2:2 im 1:5-Kontext</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Schlagwurf Mechanik</span>
+      <span class="focus-tag" style="background:rgba(255,87,34,.15);color:var(--orange)">Finte Einführung</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">2:2 im 1:5-Kontext</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content"><b>„König des Kreises":</b> Alle dribbling im 6m-Kreis, auf Pfiff muss ein Ball aus dem Kreis gespielt werden (ohne in Spieler beißen). Wer Ball verliert, macht 5 Liegestütze und kommt zurück. Dynamisches Dehnen Bein-Fokus.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Schlagwurf Technik</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Schlagwurf mit Anlauf + erstes Einleiten Sprung: Anlauf 3 Schritte, re–li–Sprung</li>
+                <li>Wurfhöhe variieren: tief (Torhüterbereich), halb-hoch, hoch (Toroberkante)</li>
+                <li>Übungsform: 3 Würfe à Position, dann rotieren</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Schlagwurf aus dem Stand festigen: Gewichtsverlagerung von hinten nach vorne</li>
+                <li>Ellenbogen-Check: muss über Schulterniveau sein beim Ausholen</li>
+                <li>Übungsform: Wurfstafette aus 7m, je 5 Würfe pro Spieler</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Explosivität im Absprung betonen – Höhe vor Weite. <strong>Gr. B:</strong> Erst Mechanik perfektionieren, dann Kraft – falsche Mechanik mit Kraft = Verletzungsrisiko!</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 2:2 im 1:5-System</div><div class="block-dur">25 Min.</div></div><div class="block-content"><div class="regel-box"><strong>ℹ 1:5 im 2:2</strong>Im 1:5-System gehen BEIDE Verteidiger aktiv raus – kein passives Stehen an der 6m-Linie. Mann-Orientierung ist Pflicht!</div><b>Konzept:</b> 2 Verteidiger decken 2 Angreifer aktiv mann-orientiert (Teil der 1:5-Pflichtabwehr).<br><br><b>Ü1:</b> 2:1 (1 Angreifer + 1 Kreisspieler vs. 2 Verteidiger): Wer greift Ballführenden an? Wer deckt Kreis aktiv?<br><b>Ü2:</b> 2:2 (Rückraum + Kreis vs. 2 Abwehrspieler): Echte 1:5-Situation – kein Stehen an der 6m-Linie!<br><div class="hinweis"><strong>Kernsatz:</strong> "Raus aus der Zone – aktiv zum Angreifer!" Passive Verteidiger an der 6m-Linie werden vom SR abgepfiffen.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Ausdauer</div><div class="block-dur">15 Min.</div></div><div class="block-content">10-Min.-Lauf als Hallenparcours (Linien, Kurven, Sprünge) mit Tempovorgabe. Letzte 2 Min. Steigerung auf 80% Tempo. Ziel: alle 10 Min. ohne Unterbrechung schaffen.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Frage in die Runde: Welcher Wurftyp liegt euch am besten?</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content">Minisspiel 4:4 als Aufwärmen – Regel: nur Pässe, kein Tor erlaubt. Fokus liegt auf Ballzirkulation und Bewegung. Dann 2 Min. lockeres Einlaufen.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Finte einführen</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Körperfinte: Körperschwerpunkt täuscht eine Richtung an, Bewegung geht in die andere</li>
+                <li>Übersteiger-Finte: Fuß über Ball bewegen + explosiver Richtungswechsel</li>
+                <li>Übungsform: 1:1 mit Finte – Angreifer muss Finte benutzen vor Durchbruch</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Richtungswechsel beim Dribbling: abrupt stoppen + neue Richtung starten</li>
+                <li>Übergang: Dribbling stoppen → Wurfbewegung (Übergangstraining)</li>
+                <li>Keine Finte, aber: Tempo wechseln beim Dribbling einüben</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Finte glaubhaft machen durch echte Körperverlagerung – nicht nur Kopf. <strong>Gr. B:</strong> Erst sicheres Dribbling, dann Richtungswechsel – beides muss automatisch werden.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Schnellangriff 3:2</div><div class="block-dur">25 Min.</div></div><div class="block-content">3 Angreifer gegen 2 Verteidiger: Überzahl ausnutzen. Regel: max. 3 Pässe vor dem Abschluss.<br><br>Abwehr lernt: 2 Verteidiger können 3 Angreifer nicht immer stoppen – den Freistehenden erkennen und rauslaufen.<br>Angreifer lernt: schnell passen, bevor Abwehr organisiert.<div class="hinweis"><strong>Trainer:</strong> Nach jeder Aktion kurz stoppen + erklären, was gut/falsch war.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Kraftausdauer</div><div class="block-dur">15 Min.</div></div><div class="block-content">3 Runden Zirkel (je Übung 30 Sek., 15 Sek. Pause):<br>Burpees (vereinfacht: Knieheben statt Liegestütz für Anfänger) → Kniebeugen → Kastensprünge (oder Steigerungssprünge) → Planke. 45 Sek. zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Ausblick Woche 4: Sprungwurf + 1:5-Abwehr Einführung als System (HVRP Pflichtabwehr).</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W4 -->
+<section id="w4" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 4 – Sprungwurf & 1:5-Abwehr Einführung</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W04_Woche04_Sprungwurf_und_15-Abwehr_Einführung.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 4 · 9. Juni 2026</div>
+    <h2>Sprungwurf & 1:5-Abwehr Einführung (HVRP Pflicht)</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Sprungwurf</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">1:5-Abwehr Einführung (HVRP Pflicht)</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Zuspiel Kreis</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content">Aufwärm-Stafette mit Ball: Teams von je 5, jeder Spieler trägt Ball durch Parcours + Staffelwechsel. 3 Runden mit steigendem Tempo.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Sprungwurf Einführung</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Sprungwurf von Außenposition: Anlauf diagonal auf Tor zu, 2-Bein-Absprung</li>
+                <li>Übungsphase: Anlauf + Absprung + Wurfphase getrennt üben, dann zusammensetzen</li>
+                <li>Ziel: 5 Sprungwürfe auf Tor aus Außenposition (je 3 links + rechts)</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>3-Schritt-Rhythmus ohne Sprung: re–li–Wurfarm hoch (fester Rhythmus)</li>
+                <li>„Ausfallschritt-Wurf" als Vorstufe: letzter Schritt groß, dann Wurfbewegung</li>
+                <li>Wurfstafette aus 7m: 5 Würfe pro Spieler, Ziel Torbereich anvisieren</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Flüssiger Übergang Anlauf–Sprung ist das Lernziel, nicht die Wurfkraft. <strong>Gr. B:</strong> Kein Druck zum Sprungwurf – erst wenn Rhythmus automatisch sitzt.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:5-Abwehr einführen (HVRP Pflichtabwehr)</div><div class="block-dur">25 Min.</div></div><div class="block-content"><div class="regel-box warn"><strong>⚠ Wichtig: 6:0 ist in der D-Jugend VERBOTEN!</strong>Die 1:5-Abwehr ist die einzig erlaubte Abwehrform im HVRP D-Jugend. Grundaufstellung aller Spieler in der Nahwurfzone = Regelverstoß → SR-Abpfiff!</div><b>Erklärung 1:5-System</b> (5 Min.):<br>→ <b>"Die 1":</b> Ein Verteidiger geht aktiv auf den Ballführenden (außerhalb 9m-Linie) zu.<br>→ <b>"Die 5":</b> Die restlichen 5 spielen dahinter mann-orientiert – kein passives Stehen!<br><br><b>Ü1 – Statisch:</b> 6 Verteidiger aufstellen, 3 Angreifer bewegen sich ohne Ball. Abwehr verschiebt aktiv, "die 1" folgt dem Ball.<br><b>Ü2 – Mit Ball:</b> 4 Angreifer vs. 6er-Abwehr im 1:5. "Die 1" wechselt je nach Ballposition.<br><div class="hinweis"><strong>Wer ist "die 1"?</strong> Kommunikation: "Ich gehe raus!" – die 5 reagieren und rücken mann-orientiert nach.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Sprint-Ausdauer</div><div class="block-dur">15 Min.</div></div><div class="block-content">10× Hallenlänge (40m): jede 2. Länge Sprint, jede 1. Länge Traben. Gesamtdauer ~10 Min. 2 Min. aktive Pause (Stretching).</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Reflexion: Was ist der Unterschied zwischen 1:5 (erlaubt) und einer passiven 6:0-Linie (verboten)?</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – „Toaster"</div><div class="block-dur">15 Min.</div></div><div class="block-content"><b>„Toaster":</b> 2 Spieler werfen abwechselnd auf Tor, Torwart fängt/pariert, sofort Gegenangriff auf andere Seite. Alle anderen warten in 2 Schlangen. Tempo steigern nach 3 Min.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Zuspiel Kreis</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Kreiszuspiel-Varianten: normaler Pass, Rückhandpass, Over-Head-Pass (Überkopf)</li>
+                <li>Doppelpass mit Kreis einleiten: Rückraum → Kreis → sofort zurück → Abschluss</li>
+                <li>Timing: wann loslösen (bevor Ball kommt!)</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Grundpass zum Kreis: Einführung der Kreisposition (6m-Bereich kennenlernen)</li>
+                <li>Kreisspieler muss sich aktiv vom Mitspieler lösen (kein Stillstand!)</li>
+                <li>Übungsform: Kreis stellt sich hin, Außenspieler spielt an, Kreis wirft</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Timing des Loslösens ist entscheidend – Ball und Bewegung müssen synchron sein. <strong>Gr. B:</strong> Erst lernen, wann ich als Kreis bereit bin – dann Abschluss.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Spielform 3:3</div><div class="block-dur">25 Min.</div></div><div class="block-content">3 gegen 3 auf Halbfeld (6m-Linie bis Mittellinie). Wertung: Tor = 1 Punkt, korrekte Abwehrhaltung nach Ballgewinn = 1 Sonderpunkt.<br>Gruppen wechseln alle 4 Min. Trainer beobachtet Abwehr und gibt direkt Feedback.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Kraft</div><div class="block-dur">15 Min.</div></div><div class="block-content">Liegestütze 3×8 · Kniebeugen 3×10 · Seitlicher Unterarmstütz 3×20 Sek. (je Seite). Kurze Pausen. Wichtig: Technik zeigen, keine schlechten Kompensationen einschleifen.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Ausblick Woche 5: Schnellangriff als System + 1:5-Abwehr Rotationen &amp; Kommunikation vertiefen.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W5 -->
+<section id="w5" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 5 – Schnellangriff & 1:5-Abwehr Vertiefung</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W05_Woche05_Schnellangriff_und_15-Abwehr_Vertiefung.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 5 · 16. Juni 2026</div>
+    <h2>Schnellangriff als System & 1:5-Abwehr Vertiefung</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Schnellangriff organisiert</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">1:5-Rotation &amp; Kommunikation</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Außenangriff</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Reaktion</div><div class="block-dur">15 Min.</div></div><div class="block-content">Koordinationsleiter (4 Varianten). Dann Reaktionsübung: Trainer klatscht → alle sprinten 5m. Trainer hebt Hand → Stopp. Trainer zeigt Ball → dribbeln. 3 Min. Reaktionssprint.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Schnellangriff strukturiert</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Auslöser Schnellangriff: Torwart fängt → sofort langer Pass auf Flügel</li>
+                <li>3-Wellen-System: Flügel (erste Welle) → Rückraum (zweite) → Rest folgt</li>
+                <li>Kommunikation: „Ich bin frei!" rufen → Torwart spielt</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Grundprinzip: nach Ballgewinn sofort in eigene Spielhälfte schauen</li>
+                <li>Übung: Spieler stehen auf Mittellinie, auf Pfiff Sprint hinter Torraum der Gegner</li>
+                <li>Einfache 3:0-Situation: 3 Spieler laufen, Trainer wirft Ball rein, Abschluss</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Wichtig:</strong> Schnellangriff bedeutet nicht chaotisch spielen! Klare Laufwege und Kommunikation sind das A und O.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:5-Abwehr: Rotationen &amp; Übergaben</div><div class="block-dur">25 Min.</div></div><div class="block-content"><div class="regel-box"><strong>ℹ 1:5-Rotation: Kernkompetenz</strong>Wenn der Ballführende passt, wechselt die "1"-Rolle! Wer übernimmt den neuen Ballführenden? Klare Rufe: "Ich gebe ab!" / "Ich nehme!" verhindern Lücken.</div><b>Kernfrage:</b> Wer übernimmt die "1"-Rolle wenn der Ball wandert?<br><br><b>Ü1 – Ballbewegung:</b> 3 Angreifer spielen Pässe quer. Die "1" folgt dem Ball und wechselt Seite. Die 5 dahinter verschieben mann-orientiert mit.<br><b>Ü2 – Übergabe-Rufe:</b> "Ich gebe ab!" + "Ich nehme!" als feste Rufe einführen und einfordern.<br><b>Ü3 – Spielform:</b> 5:5 + TW. Abwehr spielt 1:5 mit Übergabe-Regeln.<br><div class="hinweis"><strong>Merksatz:</strong> "Kein Verteidiger steht tatenlos – jeder ist aktiv seinem Angreifer zugeordnet!" Passives Stehen = Regelverstoß!</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Team-Ausdauer-Wettkampf</div><div class="block-dur">15 Min.</div></div><div class="block-content">2 Teams. 3× 400m (= 10 Hallenlängen je Einheit). Teamzeit: langsamster Spieler bestimmt die Zeit. Alle müssen zusammen ankommen → Teamgedanke fördern. 1 Min. Pause zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Frage: Was war am Schnellangriff heute am schwersten?</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content">4:4 Aufwärmspiel – nur Pässe, kein Torwurf. Jeder Ballkontakt = 1 Punkt für das Team. Team mit 20 Punkten zuerst gewinnt die Runde. 2 Runden.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Außenangriff</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Außenangriff: Tiefenläufe vom Außen (diagonal hinter die Abwehr)</li>
+                <li>Timing: Anlauf beginnt wenn Rückraum den Ball hat</li>
+                <li>Übungsform: RM spielt → Außen läuft → Sprungwurf von Außenposition</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Außenposition kennenlernen: Grundaufstellung an der Seitenlinie nahe 6m</li>
+                <li>Anlaufvarianten: gerade (Standardfall) und diagonal (für Überlaufwurf)</li>
+                <li>Wurfübung: Sprungwurf von außen auf Tor (kein Anlauf-Stress, erst aus dem Stand)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Timing des Anlaufs ist der Trick – zu früh = Abseits-Position, zu spät = Abwehr fertig. <strong>Gr. B:</strong> Erst Anlaufvariante verstehen, dann Wurfabschluss dazu.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Spielform mit Abwehrziel</div><div class="block-dur">25 Min.</div></div><div class="block-content">4:4 volles Spiel + Torwart. Abwehr bekommt 2 Punkte für 3 Ballgewinne in Folge (Angriff nur 1 Punkt pro Tor).<br>Ziel: Abwehrspieler motivieren, aktiv zu verteidigen statt passiv zu warten.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Rumpfstabilität</div><div class="block-dur">15 Min.</div></div><div class="block-content">Zirkel Rumpf: Unterarmstütz 30 Sek. → Seitstütz 20 Sek. je Seite → Rücken-Brücke 20 Sek. → Supermann 15 Sek. je Seite. 2 Runden, 30 Sek. Pause zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Woche 6 ankündigen: Kreisspieler-Training und Rückraum-Koordination.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W6 -->
+<section id="w6" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 6 – Kreisspieler & Rückraum</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W06_Woche06_Kreisspieler-Training_und_Rückraum-Koordination.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 6 · 23. Juni 2026</div>
+    <h2>Kreisspieler-Training & Rückraum-Koordination</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Kreisspieler speziell</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">Rückraum Koordination</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Passspiel unter Druck</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content"><b>Balleimerwerfen-Stafette:</b> Gruppen à 5, jeder wirft Ball in Basketballkorb (oder Hütchen auf Kasten) – Trefferquote bestimmt Sieger. Fördert Wurfgefühl + Koordination ohne Handball-Druck.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Kreisspieler speziell</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Loslösen vom Gegner: Körpertäuschung bevor Ball kommt, dann Richtungswechsel</li>
+                <li>Annahme unter Druck: Ball fangen wenn Gegner anspringt (Körperschutz)</li>
+                <li>Drehwurf: 180°-Drehung nach Annahme, Abschluss aus der Drehung</li>
+                <li>Übungsform: 3 Kreisspieler im Wechsel, Rückraum-Anspieler dahinter</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Kreisposition: Grundstellung am 6m, Körpergefühl für den „6m-Bereich"</li>
+                <li>Einfache Annahme auf 6m: Ball fangen ohne Druck, dann Standwurf</li>
+                <li>„Wohlfühlen am 6m": Position halten ohne Scheu, Körper als Schutzschild</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Körper als Schutzschild – Rücken zur Abwehr, Ball mit dem Körper schützen. <strong>Gr. B:</strong> Zunächst kein echter Gegner – Bewegung und Abschluss müssen erst sitzen.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Rückraum-Koordination</div><div class="block-dur">25 Min.</div></div><div class="block-content"><b>Übungsform Staffelpässe:</b> RL → RM → RR spielen Pässe quer durch den Rückraum, dann Abschluss durch RM oder RL.<br><b>Steigerung:</b> Einleitung: Kreis erhält Ball vom Rückraum → zurück → Abschluss (Doppelpass-Prinzip).<br>Abwehr (1:5): "die 1" folgt dem Ball horizontal, die 5 verschieben mann-orientiert.<div class="hinweis"><strong>Lernziel:</strong> Rückraum lernt, horizontal zu spielen und Lücken zu erkennen.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Intervallsprint</div><div class="block-dur">15 Min.</div></div><div class="block-content">5× 1-Min.-Sprint (Hallen-Shuttle: 6m hin und zurück, so oft wie möglich) mit 1 Min. Pause. Zählt Hin-und-Her-Wiederholungen. Vergleich zu früheren Wochen (informell).</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Feedback: Wer möchte Kreisspieler werden? Erste Positionsneigungen erheben.</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Mini-Turnier</div><div class="block-dur">15 Min.</div></div><div class="block-content">3:3 Mini-Turnier-Aufwärmen: kurze Spielzeiten (2 Min.), viel Rotation. Spielcharakter zum Aufwärmen, kein Leistungsdruck.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Passspiel unter Druck</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Passen mit echtem Gegnerdruck: Verteidiger versucht Ball abzufangen</li>
+                <li>Doppelpass in 2:1-Situation: wer ist frei? Schnelle Entscheidung treffen</li>
+                <li>Drucktraining: 3 Sekunden Zeit bis Pass weg sein muss</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Passen mit leichtem Druck: Verteidiger greift Wurfarm leicht an (kein echter Block)</li>
+                <li>Angreifer muss Körper schützen + dennoch sauber passen</li>
+                <li>Übungsform: 1:1 Passen, Verteidiger auf Arm achten</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Lernziel:</strong> Drucksituationen entspannt lösen. Fehler jetzt machen ist besser als im Spiel!</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Spielform 5:5</div><div class="block-dur">25 Min.</div></div><div class="block-content">Volles 5:5 + Torwart. Trainer gibt Abwehr vor (1:5 konsequent). Angriff frei spielen. 3 Teams à 10: 2 Teams spielen, 1 wartet (Pause). Wechsel nach 5 Min.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Zirkeltraining</div><div class="block-dur">15 Min.</div></div><div class="block-content">4 Stationen à 45 Sek. (je 15 Sek. Wechselzeit):<br>St.1: Liegestütze · St.2: Squat Jumps (Kniebeugesprünge) · St.3: Mountain Climbers · St.4: Planke.<br>2 Runden, 60 Sek. Pause zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Ausblick Woche 7: 3:3-Kombinationsspiel und 1:5-Übergabe-Kommunikation vertiefen.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W7 -->
+<section id="w7" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 7 – 3:3-Kombinationen & 1:5-Kommunikation</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W07_Woche07_33-Kombinationen_und_15-Kommunikation.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 7 · 30. Juni 2026</div>
+    <h2>3:3-Kombinationen & 1:5-Kommunikation</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Doppelpass & Kreuzen</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">1:5 Übergabe-Kommunikation</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Wurfvarianten vertieft</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Abfangen</div><div class="block-dur">15 Min.</div></div><div class="block-content"><b>„Abfangen":</b> 4 Verteidiger stellen sich in einer Linie auf (6m). Angreifer mit Ball versuchen, die Linie mit Dribbling zu durchdringen. Verteidiger dürfen nur durch Positionsspiel stören (kein Kontakt). Wer durchkommt: 1 Punkt. 2 Runden.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – 3:3-Kombinationen</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Doppelpass + Kreuzen: A → B, A kreuzt hinter B, bekommt Ball zurück oder B wirft</li>
+                <li>3er-Kreis mit Laufweg: alle 3 Spieler kreuzen nacheinander, 1 Abschluss</li>
+                <li>Anschlusskombination: Doppelpass → Durchbruch → Tor</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Kreuzlauf Grundform: A gibt Ball, B kreuzt, A bekommt Ball zurück</li>
+                <li>Pässe + Lagenwechsel: nach jedem Pass die Seite wechseln</li>
+                <li>Übungsform: A gibt → B kreuzt → B wirft (vereinfachte Version)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Timing der Laufwege ist entscheidend – zu früh laufen = Abseits. <strong>Gr. B:</strong> Blickkontakt vor dem Kreuz ist Pflicht – kein blindes Kreuzen!</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:5-Kommunikation &amp; Übergaben</div><div class="block-dur">25 Min.</div></div><div class="block-content"><div class="regel-box"><strong>ℹ 1:5 Übergabe-Prinzip</strong>Wenn ein Angreifer aus meiner Deckungszone läuft, gebe ich ihn weiter. Rufe: "Ich gebe ab!" / "Ich nehme!" Das ist das Herzstück der 1:5-Koordination.</div><b>Übergabe-Prinzip üben:</b> Wenn Angreifer aus meiner Deckungszone läuft, übergebe ich ihn und übernehme einen anderen.<br><br><b>Übungsform:</b> 3 Angreifer vs. 3 Verteidiger (Teil des 1:5). Angriff kreuzt und bewegt sich. Abwehr koordiniert Übergaben.<br>Pflicht-Rufe: "Ich gebe ab!" + "Ich nehme!" – Trainer hört auf diese Rufe! Abwehr bekommt Punkt für saubere Kommunikation.<br><div class="hinweis"><strong>Trainer:</strong> Aktiv einfordern: "Wer hat jetzt den Angreifer?" – Pause und Erklärung wenn nötig. Kommunikation ist trainierbar!</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Ausdauer-Spielform</div><div class="block-dur">15 Min.</div></div><div class="block-content">2× 6-Min. Handball-Intervall-Spiel: Volles Tempo, kurze Pausen nur bei Torwurf + Einwurf. Kein Anhalten außer Regelunterbrechung. Ziel: Spielausdauer entwickeln.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Motivation: Nächste Woche Mini-Turnier! Alle spielen zusammen.</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Jonglier-Runde</div><div class="block-dur">15 Min.</div></div><div class="block-content">Lockerungsrunde: Jonglieren mit Ball (auf Oberschenkel/Unterarm tippen wie Fußball), Tricks versuchen, Herausforderungen zwischen Spielern (ohne Leistungsdruck). Dann normales Einlaufen.</div></div>
+      <div class="block">
+        <div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Wurfvarianten vertieft</div><div class="block-dur">25 Min.</div></div>
+        <div class="block-content">
+          <div class="diff-row">
+            <div class="diff-box gruppe-a">
+              <div class="diff-label">Gruppe A</div>
+              <ul>
+                <li>Fallwurf einführen: Wurf im Flug, Landung auf Schulter (Sicherheit zuerst, langsam!)</li>
+                <li>Drehwurf vom Rückraum: 90°-Drehung + Abschluss</li>
+                <li>Wurfwinkel variieren: Halblinks / Halbrechts anvisieren</li>
+              </ul>
+            </div>
+            <div class="diff-box gruppe-b">
+              <div class="diff-label">Gruppe B</div>
+              <ul>
+                <li>Schlagwurf und Sprungwurf kombinieren: je 5 von beiden</li>
+                <li>Wurfstafette mit Anlauf: 3 Schritte Anlauf, dann Schlagwurf</li>
+                <li>Zielgenauigkeit: Torzonen anvisieren (links unten, rechts oben etc.)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hinweis"><strong>Gr. A:</strong> Fallwurf-Einführung sehr sorgfältig! Boden-Check, Knieschoner empfehlen, langsames Einüben. <strong>Gr. B:</strong> Zielgenauigkeit vor Kraft – lieber präzise als kraftvoll.</div>
+        </div>
+      </div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Spielform 6:6 mit 1:5-Abwehr</div><div class="block-dur">25 Min.</div></div><div class="block-content">6:6 + Torwart. Abwehr spielt konsequentes 1:5 (Positionen kurz besprechen). Angriff frei. 15 spielen, 15 beobachten.<br>Beobachter-Aufgabe: "Zählt wie oft die Übergabe-Rufe kommen."</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Kraft-Zirkel</div><div class="block-dur">15 Min.</div></div><div class="block-content">3 Runden: 10 Liegestütze → 10 Kniebeugen → 10 Sprünge → 15 Sek. Planke. Kurze Pausen (30 Sek.) zwischen Übungen, 60 Sek. zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Ankündigung W8: Leistungstest W1 vs. W8 + Miniturnier mit Pflicht-1:5-Abwehr.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W8 -->
+<section id="w8" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 8 – Leistungsüberprüfung & Miniturnier</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W08_Woche08_Leistungsüberprüfung_und_Miniturnier.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 8 · 7. Juli 2026</div>
+    <h2>Leistungsüberprüfung & internes Miniturnier</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Diagnose-Vergleich</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Wettkampf-Einführung</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">Teamgefühl</span>
+    </div>
+    <div class="meta-row"><div class="meta-chip">Besonderheit <span>Vergleich Diagnose W1 → jetzt! Sichtbarer Fortschritt für alle Spieler</span></div></div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1 – Leistungstest</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content">Einlaufen mit Pässen als Team (alle 30 gemeinsam). Kurze Mannschafts-Koordinationsübung: alle in Linie laufen + auf Signal Richtung wechseln.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Diagnose-Wiederholung (identisch zu Woche 1)</div><div class="block-dur">30 Min.</div></div><div class="block-content">Gleiche 4 Stationen wie Woche 1 (7 Min. je Station):<br><br><b>St. 1 – Wurftest:</b> Torwurf aus 7m. Trainer beobachtet Technik-Verbesserung.<br><b>St. 2 – Dribbling-Parcours:</b> Hütchenslalom. Geschwindigkeit messen (informell).<br><b>St. 3 – Passtest:</b> 30 Sek. gegen Wand, Wiederholungen zählen.<br><b>St. 4 – Koordination:</b> Einbeinstand + Balanceaufgabe.<br><br><div class="hinweis"><strong>Trainer:</strong> Direkten Vergleich W1 zu W8 verbal kommunizieren – „Du hast X jetzt viel besser als am Anfang!" Sichtbarer Fortschritt motiviert enorm.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Taktik-Briefing Miniturnier</div><div class="block-dur">20 Min.</div></div><div class="block-content">Teams für Miniturnier (nächste Einheit) aufstellen: 4 Teams à 7-8 Spieler. Mix aus Gruppe A und B in jedem Team.<br>Pflicht-Abwehr für alle Teams: 1:5! "Die 1" geht aktiv raus, 5 dahinter mann-orientiert.<br>5 Min. Teambesprechung + Strategie festlegen.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Lockere Kondition</div><div class="block-dur">10 Min.</div></div><div class="block-content">Lockeres Dehnen + dynamische Bewegungsübungen. Keine intensive Kondition – morgen ist Turnier.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Teamgespräch & Motivation</div><div class="block-dur">15 Min.</div></div><div class="block-content">Trainer gibt individuelle Feedbacks (kurz, 1 Satz je Spieler). Motivationsansprache für Turnier. Teamnamen bestimmen lassen.</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2 – Miniturnier</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Einlaufen als Team</div><div class="block-dur">15 Min.</div></div><div class="block-content">Teams laufen gemeinsam ein. Individuelles Aufwärmen + Teambesprechung (5 Min.). Trainer gibt letzte Hinweise zur 1:5-Abwehr (Übergabe-Rufe, wer geht als "1" raus).</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Miniturnier – Liga-Format</div><div class="block-dur">65 Min.</div></div><div class="block-content"><b>Format:</b> 4 Teams (A, B, C, D). 3 Begegnungen nach Liga-System (A:B, C:D, dann A:C / B:D, dann Finale).<br><b>Spielzeit:</b> 2× 7 Min. mit 2 Min. Pause.<br><b>Pflicht:</b> Jeder Spieler muss mindestens 12 Min. spielen. Rotation nach Halbzeit.<br><br><b>Trainer beobachtet aktiv:</b><br>• Wird der Sprungwurf angewendet?<br>• Spielen alle in der 1:5-Abwehr? (passives Stehen an 6m-Linie = sofortige Korrektur)<br>• Wird nach Ballgewinn sofort nach vorne geschaut?<br><br><div class="hinweis"><strong>Coaching:</strong> Timeouts aktiv nutzen für kurze taktische Hinweise. Positives Feedback laut kommunizieren – andere Spieler hören es auch.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Abschluss & Saisonausblick</div><div class="block-dur">10 Min.</div></div><div class="block-content"><b>Preisverleihung</b> (keine materiellen Preise – nur Anerkennung):<br>🏆 "Meiste Entwicklung seit W1" · 🛡 "Bester Teamplayer" · 🔒 "Beste 1:5-Abwehr des Turniers"<br><br>Ankündigung: Sommerpause bald – <b>Fitness-Karten</b> werden verteilt. Wer nach den Ferien fitter ist als vorher, bekommt Startplatz. Ausblick Phase 2: Saisonvorbereitung im August.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W9 -->
+<section id="w9" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 9 – Positionstraining &amp; 1:5-Positionen</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W09_Woche09_Positionstraining_und_15-Positionen.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 9 · 14. Juli 2026 (ggf. Ferienbetrieb)</div>
+    <h2>Positionstraining beginnt</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Positionsorientierung</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">1:5-Positionsrollen</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Kombinationen</span>
+    </div>
+    <div class="meta-row"><div class="meta-chip">Hinweis <span>Ggf. weniger Spieler wegen Ferienanfang – Pläne anpassen</span></div></div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Reaktiv</div><div class="block-dur">15 Min.</div></div><div class="block-content">Koordinationsleiter (3 Varianten). Dann Reaktionstraining: Trainer zeigt Zahl (1–4) → Spieler muss zur entsprechenden Ecke der Halle sprinten. 10 Wiederholungen.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Positionsorientierung</div><div class="block-dur">25 Min.</div></div><div class="block-content">Spieler werden ersten Positionen zugeteilt (Neigung + Eignung):<br><br><b>Außenspieler (4–6 Sp.):</b> Lauftempo, Sprungwurf, Außenwurf üben.<br><b>Rückraum (8–10 Sp.):</b> Schlag- und Sprungwurf, Raumaufteilung.<br><b>Kreis (3–4 Sp.):</b> Loslösen, Drehwurf, Kontakt halten.<br><b>Torwart (2–3 Sp.):</b> Grundstellung, Reaktion, kurze spezifische TW-Übung.<br><b>Restliche Gr. B (5–7 Sp.):</b> Weiter allgemeine Grundlagen-Übungen.<br><br><div class="hinweis"><strong>Hinweis:</strong> Positionen sind noch nicht fix – ausprobieren steht im Vordergrund. Kein Spieler soll das Gefühl haben, „abgestempelt" zu sein.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:5-Abwehr Positionsschulung</div><div class="block-dur">25 Min.</div></div><div class="block-content">Spieler in ihren Positionen – jede hat eine Abwehrverantwortung im 1:5:<br>→ <b>Außenspieler:</b> "Mann am Außen aktiv decken"<br>→ <b>Rückraum:</b> "Die 1"-Rolle oder aktiver Unterstützer<br>→ <b>Kreis:</b> Kreis-Gegenspieler im 1:1 aktiv halten<br>Übungsform: 5:5 + TW. Jeder kennt seinen Abwehr-Gegenspieler. 1:5 konsequent spielen.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Sprint-Staffel</div><div class="block-dur">15 Min.</div></div><div class="block-content">3× Sprintstafette: Teams à 6, jeder 2 Hallenlängen Sprint. Teamwettbewerb. Fördert Teamdynamik + Ausdauer.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Positionsfeedback: Wie hat sich die Position angefühlt?</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen</div><div class="block-dur">15 Min.</div></div><div class="block-content">5:5 Aufwärmspiel – lockeres Tempo, freies Spiel. Ziel: Spaß und Eingewöhnung nach Woche 8-Turnier.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Kombinationsspiel</div><div class="block-dur">25 Min.</div></div><div class="block-content">Doppelpass-Ketten: Gruppen à 4, jeder passt → läuft hinter dem Pass; nächster nimmt an + passt weiter.<br>Einführung Zusammenspiel Rückraum Rechts + Außen: RR spielt auf Außen, Außen wirft oder gibt zurück.<br>Ziel: erste echte Kombination, die im Spiel angewendet werden kann.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – Freies Spiel mit Trainer-Coaching</div><div class="block-dur">25 Min.</div></div><div class="block-content">Volles 5:5 + TW. Trainer coached aktiv Abwehrpositionen (kurze Pausen zum Erklären erlaubt). Fokus: Abwehrsystem und Kommunikation – Angriff ist sekundär in dieser Einheit.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Kondition – Kraft-Ausdauer</div><div class="block-dur">15 Min.</div></div><div class="block-content">2 Runden à 5 Übungen je 40 Sek. (20 Sek. Pause): Liegestütze → Kniebeugen → Seitensprünge → Unterarmstütz → Mountain Climbers. 90 Sek. Pause zwischen Runden.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Nächste Woche: Abschluss Phase 1 und Hausaufgaben für die Sommerpause.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- W10 -->
+<section id="w10" style="display:none">
+  <div class="pdf-strip"><p>📄 <strong>Woche 10 – Abschluss Phase 1</strong> &nbsp;·&nbsp; 2 Seiten &nbsp;·&nbsp; Phase 1 Aufbauphase</p><a class="pdf-btn" href="./W10_Woche10_Abschluss_Phase_1_und_Vorbereitung_Ferien.pdf" download><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Als PDF herunterladen</a></div>
+  <div class="page-header">
+    <div class="breadcrumb">Phase 1 · Woche 10 · Abschluss vor Sommerpause</div>
+    <h2>Abschluss Phase 1 & Vorbereitung Ferien</h2>
+    <div class="week-focus-tags">
+      <span class="focus-tag" style="background:rgba(0,191,165,.15);color:var(--teal)">Zusammenfassung</span>
+      <span class="focus-tag" style="background:rgba(255,179,0,.15);color:var(--amber)">Fitness-Hausaufgaben</span>
+      <span class="focus-tag" style="background:rgba(255,107,107,.15);color:var(--coral)">Abschlussturnier</span>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header"><h4>Training 1 – Rückblick & Fitness-Karten</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Aufwärmen – Lieblings-Spiel</div><div class="block-dur">15 Min.</div></div><div class="block-content">Spieler dürfen das Aufwärmspiel wählen (Abstimmung, 2 Optionen). Entscheidend: Eigenverantwortung stärken.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Hauptteil 1 – Technik-Rückblick</div><div class="block-dur">25 Min.</div></div><div class="block-content">Alle 7 Kerntechniken der Phase 1 kurz wiederholen:<br>Schlagwurf · Sprungwurf · Dribbling (li/re) · Schulter-Pass · Druckpass · Finte · Schnellangriff-Auslöser.<br><br>Gruppe A demonstriert, Gruppe B wiederholt. Trainer gibt positives Feedback zu sichtbaren Fortschritten seit Woche 1.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--coral)"></div><div class="block-title">Hauptteil 2 – 1:5-Schauübung (Pflichtabwehr HVRP)</div><div class="block-dur">25 Min.</div></div><div class="block-content">1:5-Abwehr nochmals vollständig demonstrieren und üben. Alle rotieren durch alle Rollen (je ~4 Min.):<br>→ "Die 1": aktiv auf Ballführenden, wo ist die Grenze (9m-Linie)?<br>→ "Die 5": mann-orientiert verschieben + Übergabe-Rufe.<br>Abschließend: Spielform 5:5 mit konsequentem 1:5. Trainer vergibt Punkte für beste Kommunikation.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#FF8A65"></div><div class="block-title">Fitness-Karten ausgeben & erklären</div><div class="block-dur">15 Min.</div></div><div class="block-content"><b>Sommerpause-Hausaufgaben (Fitness-Karte für jeden Spieler):</b><br><br>📋 <b>Wöchentlich:</b> 2× 20 Min. Laufen (oder Radfahren/Schwimmen)<br>📋 <b>3× pro Woche:</b> Koordinationsübungen: Einbeinstand, Hüpfübungen, Prellen re/li<br>📋 <b>1× pro Woche:</b> Krafteinheit zuhause: Liegestütze, Kniebeugen, Planke<br>📋 <b>Optional:</b> Ball mitbringen, täglich 15 Min. prellen und werfen<br><br><div class="hinweis"><strong>Motivationsanreiz:</strong> Wer nach den Ferien den Fitness-Test besteht (10 Min. Dauerlauf + Koordinationstest), erhält erhöhte Einsatzzeit in der ersten Woche nach der Pause.</div></div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Cool-down</div><div class="block-dur">10 Min.</div></div><div class="block-content">Dehnen. Ausblick: August-Vorbereitung – es wird intensiver! Motivation für den Sommer mitgeben.</div></div>
+    </div>
+    <div class="session-card">
+      <div class="session-header"><h4>Training 2 – Abschluss-Spieltag 🏆</h4><span class="session-time">90 Min.</span></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#4FC3F7"></div><div class="block-title">Einlaufen</div><div class="block-dur">15 Min.</div></div><div class="block-content">Teams-Einlaufen gemeinsam. Kurze Teamansprache je Team.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:var(--teal)"></div><div class="block-title">Abschlussturnier</div><div class="block-dur">55 Min.</div></div><div class="block-content">4 Teams, gemischte Besetzung (Gr. A + B je Team). Spielzeit: 2× 6 Min. 3 Begegnungen nach Liga-System.<br><br>Sonderregel: <b>Jeder Spieler muss mindestens 1 Mal als Torwart spielen</b> (fördert Respekt für die Position).<br><br>Trainer: aktives Coaching, aber auch Eigenverantwortung der Spieler fördern.</div></div>
+      <div class="block"><div class="block-header"><div class="block-icon" style="background:#81C784"></div><div class="block-title">Saisonabschluss Phase 1 & Verabschiedung</div><div class="block-dur">20 Min.</div></div><div class="block-content"><b>Ehrungen:</b><br>🥇 „Größte Entwicklung in Phase 1"<br>🤝 „Bester Teamgeist"<br>🎯 „Präzisester Torschütze"<br>🛡 "Beste 1:5-Abwehr"<br><br>Verabschiedung in die Ferien. Nächstes Training: 24. August 2026 (ca.). Fitness-Karten mitnehmen!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOMMERPAUSE -->
+<section id="sommerpause" style="display:none">
+  <div class="page-header"><div class="breadcrumb">Pause</div><h2>Sommerpause – Rheinland-Pfalz Schulferien</h2></div>
+  <div class="pause-card">
+    <h3>☀ 29. Juni – 7. August 2026</h3>
+    <p style="margin-top:.5rem">Kein reguläres Training. Fitness-Karten wurden in Woche 10 ausgeteilt. Tipp: Letzte Trainingseinheit vor den Ferien ggf. auf KW 26 (Ende Juni) vorziehen.</p>
+  </div>
+    <div class="regel-box" style="background:rgba(255,179,0,.1);border-color:rgba(255,179,0,.4);color:#FFF9C4;margin-bottom:1rem">
+    <strong style="color:#FFB300">⚠ Pfingstferien RLP: 26. Mai – 5. Juni 2026</strong>
+    Woche 2 (26. Mai) und Woche 3 (2. Juni) fallen in die Pfingstferien. Training ggf. verlegen oder als freiwilliges Angebot durchführen. Die offizielle Saison-Startphase kann entsprechend nach den Ferien beginnen.
+  </div>
+  <div class="section-title" style="margin-top:1.5rem">Aufgaben für die Spieler</div>
+  <table class="structure-table">
+    <thead><tr><th>Aufgabe</th><th>Häufigkeit</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Ausdauerlauf oder Alternativen</td><td>2× pro Woche</td><td>20 Min. Laufen, Radfahren oder Schwimmen</td></tr>
+      <tr><td>Koordination</td><td>3× pro Woche</td><td>Einbeinstand, Hüpfübungen, Prellen beidhändig</td></tr>
+      <tr><td>Kraft zuhause</td><td>1× pro Woche</td><td>Liegestütze, Kniebeugen, Planke (je 3×10)</td></tr>
+      <tr><td>Ballarbeit (optional)</td><td>täglich 15 Min.</td><td>Prellen, Werfen gegen Wand, Fangen</td></tr>
+    </tbody>
+  </table>
+  <div class="hinweis" style="margin-top:1rem"><strong>Trainer-Aufgaben in der Pause:</strong> Gegner-Beobachtung (Spiele anderer D-Jugend Teams), Trainingsplan für Phase 2 finalisieren, individuelle Entwicklungsziele für Spieler festhalten.</div>
+</section>
+
+<!-- PHASE 2 -->
+<section id="p2" style="display:none">
+  <div class="page-header">
+    <div class="breadcrumb">Phase 2 · Saisonvorbereitung</div>
+    <h2>Intensivphase & Systemeinführung</h2>
+    <div class="phase-badge" style="background:rgba(255,179,0,.15);color:var(--amber);border:1px solid rgba(255,179,0,.3)">⚡ Intensivierung · August – September 2026</div>
+    <div class="meta-row">
+      <div class="meta-chip">Wochen <span>11–14</span></div>
+      <div class="meta-chip">Datum <span>24. Aug – 18. Sep 2026</span></div>
+      <div class="meta-chip">Einheiten <span>8 à 90 Min.</span></div>
+    </div>
+  </div>
+  <div class="section-title">Phasenziele</div>
+  <div class="diff-row" style="margin-bottom:1.5rem">
+    <div class="diff-box gruppe-a">
+      <div class="diff-label" style="color:var(--amber)">Technisch-taktische Ziele</div>
+      <ul>
+        <li>3:3-Angriffssystem vollständig einführen</li>
+        <li>1:5-Abwehr sicher und variativ beherrschen (HVRP Pflicht bleibt)</li>
+        <li>Sprungwurf für alle Gr.-A-Spieler sicher</li>
+        <li>Freiwurf-Situationen standardisieren</li>
+      </ul>
+    </div>
+    <div class="diff-box gruppe-b">
+      <div class="diff-label" style="color:var(--amber)">Konditionelle Ziele</div>
+      <ul>
+        <li>Fitness-Test bestehen (10-Min.-Lauf + Koordination)</li>
+        <li>Spielausdauer: 2× 30-Min.-Spielhälften ohne Einbruch</li>
+        <li>Sprinkraft verbessern (Absprungtest W8 vs. W14)</li>
+        <li>Gruppenannäherung: Leistungsgefälle sinkt auf ~30%</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-title">Wochenstruktur Phase 2</div>
+  <table class="structure-table">
+    <thead><tr><th>Woche</th><th>Datum</th><th>Training 1</th><th>Training 2</th></tr></thead>
+    <tbody>
+      <tr><td><strong>W11</strong></td><td>24.–28. Aug</td><td>Fitness-Rückkehrtest + intensive Konditionseinheit. Gruppenneueinteilung nach Ferien-Entwicklung.</td><td>Technik-Auffrischung: Schlagwurf, Pässe, Dribbling – Rückstand aufholen.</td></tr>
+      <tr><td><strong>W12</strong></td><td>31. Aug–4. Sep</td><td>3:3-Angriffssystem Einführung: RM–RR–Außen kombinieren. Laufwegschemas einführen.</td><td>Abwehr-Reaktivierung: 1:5-Kommunikation + Rotationsschulung nach Sommerpause.</td></tr>
+      <tr><td><strong>W13</strong></td><td>7.–11. Sep</td><td>Abwehr-Intensivwoche: 1:5-Festigung unter Wettkampfdruck. Übergaben in schnellen Spielsituationen.</td><td>Spielformen mit 1:5-Abwehrvorgabe: 4×5-Min.-Blöcke mit steigendem Druck.</td></tr>
+      <tr><td><strong>W14</strong></td><td>14.–18. Sep</td><td>Spielvorbereitung: Freiwürfe, 7m, Auslöser-Situationen. Leistungstest-Wiederholung.</td><td>Volles Vorbereitungsspiel intern (2× 25 Min. Spielhälften) – Saisonstart-Simulation.</td></tr>
+    </tbody>
+  </table>
+  <div class="section-title">Trainingsstruktur-Anpassung ab Phase 2</div>
+  <table class="structure-table">
+    <thead><tr><th>Block</th><th>Zeit</th><th>Änderung gegenüber Phase 1</th></tr></thead>
+    <tbody>
+      <tr><td>Aufwärmen</td><td>15 Min.</td><td>Mehr handball-spezifisch: Pässe beim Einlaufen, weniger allgemeines Spielen</td></tr>
+      <tr><td>Hauptteil 1</td><td>20 Min.</td><td>Kürzer, dafür intensiver. Differenzierung wird reduziert – Gruppe A + B zunehmend gemeinsam</td></tr>
+      <tr><td>Hauptteil 2</td><td>30 Min.</td><td>Mehr Spielformen, Taktiktraining tritt in den Vordergrund</td></tr>
+      <tr><td>Kondition</td><td>15 Min.</td><td>Intensiver: Spielnahe Kondition (Sprints, Reaktion, Spielausdauer)</td></tr>
+      <tr><td>Cool-down</td><td>10 Min.</td><td>Zunehmend: Video-/Analyse-Element (kurze Spielszenen besprechen)</td></tr>
+    </tbody>
+  </table>
+  <div class="hinweis"><strong>Gruppenentwicklung:</strong> In Phase 2 wird Gruppe B schrittweise in Gruppe A integriert, wo der Lernstand dies erlaubt. Ziel: keine strikte Trennung mehr ab Woche 12/13. Individuelle Spieler, die noch Grundlagen benötigen, erhalten gezieltes 1:1-Coaching in der Aufwärmphase.</div>
+</section>
+
+<!-- PHASE 3 -->
+<section id="p3" style="display:none">
+  <div class="page-header">
+    <div class="breadcrumb">Phase 3 · Hauptsaison Hinrunde</div>
+    <h2>Wettkampfbetrieb & Taktik-Feinschliff</h2>
+    <div class="phase-badge" style="background:rgba(255,107,107,.15);color:var(--coral);border:1px solid rgba(255,107,107,.3)">🏆 Hinrunde · Sep – Dez 2026</div>
+    <div class="meta-row">
+      <div class="meta-chip">Wochen <span>15–27</span></div>
+      <div class="meta-chip">Datum <span>21. Sep – 19. Dez 2026</span></div>
+      <div class="meta-chip">Einheiten <span>26 à 90 Min.</span></div>
+    </div>
+  </div>
+  <div class="section-title">Phasenziele</div>
+  <div class="diff-row" style="margin-bottom:1.5rem">
+    <div class="diff-box gruppe-a">
+      <div class="diff-label" style="color:var(--coral)">Spielerische Ziele</div>
+      <ul>
+        <li>1:5-Abwehr situativ anpassen und konsequent durchhalten</li>
+        <li>Schnellangriff in echten Spielsituationen erfolgreich einsetzen</li>
+        <li>Erste Spielanalyse: eigene Fehler erkennen und benennen</li>
+        <li>Positionsspezifisches Spiel aller Spieler etabliert</li>
+      </ul>
+    </div>
+    <div class="diff-box gruppe-b">
+      <div class="diff-label" style="color:var(--coral)">Team-Ziele</div>
+      <ul>
+        <li>Kader-Rotation beherrschen: alle können alle Positionen grob</li>
+        <li>Kommunikation im Spiel: Ball-, Laufweg-, Abwehr-Ansagen</li>
+        <li>Moral-Management: Rückstände aufholen ohne aufzugeben</li>
+        <li>Spieler-Führung: Kapitänsprinzip einführen</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-title">Trainingszyklus (Spielwochen)</div>
+  <table class="structure-table">
+    <thead><tr><th>Training</th><th>Fokus</th><th>Methode</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Training 1</strong> (Anfang Woche)</td><td>Spielanalyse + Schwachstellen-Korrektur</td><td>Letztes Spiel besprechen (5 Min.), dann gezieltes Training auf erkannte Schwäche. 1:5-Drill oder Positionstraining je nach Bedarf.</td></tr>
+      <tr><td><strong>Training 2</strong> (Ende Woche)</td><td>Spielvorbereitung + freie Spielform</td><td>Taktik für nächstes Spiel einüben (bekanntes System), dann freies Spiel (5:5) mit Fokus auf Spielspaß und Selbstvertrauen.</td></tr>
+    </tbody>
+  </table>
+  <div class="section-title">Monatliche Schwerpunkte Hinrunde</div>
+  <table class="structure-table">
+    <thead><tr><th>Monat</th><th>Technischer Fokus</th><th>Taktischer Fokus</th><th>Kondition</th></tr></thead>
+    <tbody>
+      <tr><td>September 2026</td><td>Spielsicherheit bei Standardsituationen (7m, Freiwurf, Einwurf)</td><td>1:5-Abwehr festigen, Schnellangriff nach Ballgewinn definieren</td><td>Spielausdauer: 2× 30 Min. voll</td></tr>
+      <tr><td>Oktober 2026</td><td>Positionsspezifische Würfe (Außen-Sprungwurf, Kreis-Drehwurf)</td><td>3:3-Angriffssystem mit Kreisspieler-Integration</td><td>Explosivkraft (Absprung + Antritt)</td></tr>
+      <tr><td>November 2026</td><td>Drucksituationen: Wurf unter Abwehrdruck</td><td>1:5-Abwehr situativ anpassen (Spielstand, Gegner, Druck)</td><td>Intensive Spielform-Kondition</td></tr>
+      <tr><td>Dezember 2026</td><td>Freiwurf-Varianten, 7m-Sicherheit</td><td>Spielschluss-Situationen (knapper Vorsprung/Rückstand)</td><td>Stabilisierung, keine Überlastung vor Pause</td></tr>
+    </tbody>
+  </table>
+  <div class="hinweis"><strong>Hinrunden-Management:</strong> Nach jedem Spieltag kurzes Feedback-Formular für Spieler (3 Fragen: Was war gut? Was war schwierig? Was möchte ich nächste Woche verbessern?). Stärkt Selbstreflexion enorm.</div>
+</section>
+
+<!-- WINTERPAUSE -->
+<section id="winterpause" style="display:none">
+  <div class="page-header"><div class="breadcrumb">Pause</div><h2>Winterpause</h2></div>
+  <div class="pause-card">
+    <h3>❄ ca. 22. Dezember 2026 – 8. Januar 2027</h3>
+    <p style="margin-top:.5rem">Erholung + aktive Regeneration. ~3 Wochen Pause.</p>
+  </div>
+  <div class="section-title" style="margin-top:1.5rem">Empfehlungen Winterpause</div>
+  <table class="structure-table">
+    <thead><tr><th>Aktivität</th><th>Häufigkeit</th><th>Hinweis</th></tr></thead>
+    <tbody>
+      <tr><td>Lockeres Laufen</td><td>1–2× pro Woche</td><td>Kein Leistungsdruck, Erholung wichtiger als Fitness-Erhalt</td></tr>
+      <tr><td>Ballarbeit</td><td>Optional</td><td>Wer möchte: täglich 15 Min. Prellen und Werfen</td></tr>
+      <tr><td>Dehnen</td><td>Täglich 5 Min.</td><td>Flexibilität erhalten, Verletzungsrisiko nach Pause senken</td></tr>
+    </tbody>
+  </table>
+  <div class="hinweis" style="margin-top:1rem"><strong>Trainer:</strong> Erste Trainingseinheit nach Pause = lockeres Aufbautraining. Kein sofortiger Leistungsdruck. Körper braucht 1–2 Wochen zur Reaktivierung.</div>
+</section>
+
+<!-- PHASE 4 -->
+<section id="p4" style="display:none">
+  <div class="page-header">
+    <div class="breadcrumb">Phase 4 · Hauptsaison Rückrunde</div>
+    <h2>Leistungspeak & Saisonfinale</h2>
+    <div class="phase-badge" style="background:rgba(156,39,176,.15);color:var(--violet);border:1px solid rgba(156,39,176,.3)">🔥 Rückrunde · Jan – Mai 2027</div>
+    <div class="meta-row">
+      <div class="meta-chip">Wochen <span>28–44</span></div>
+      <div class="meta-chip">Datum <span>11. Jan – 15. Mai 2027</span></div>
+      <div class="meta-chip">Einheiten <span>34 à 90 Min.</span></div>
+    </div>
+  </div>
+  <div class="section-title">Phasenziele</div>
+  <div class="diff-row" style="margin-bottom:1.5rem">
+    <div class="diff-box gruppe-a">
+      <div class="diff-label" style="color:var(--violet)">Leistungsziele</div>
+      <ul>
+        <li>Saisonhöchstleistung in W35–40 (zentraler Staffelblock)</li>
+        <li>Alle Spieler wenden die 1:5-Abwehr automatisch und variativ an</li>
+        <li>Individueller Leistungsvergleich: W1 vs. W44-Diagnose</li>
+        <li>Mentale Stärke: enge Spiele gewinnen</li>
+      </ul>
+    </div>
+    <div class="diff-box gruppe-b">
+      <div class="diff-label" style="color:var(--violet)">Entwicklungsziele</div>
+      <ul>
+        <li>Eigenverantwortung der Spieler: selbst Aufwärmprogramm leiten</li>
+        <li>Verletzungsprävention: kein unnötiger Ausfall in Schlussphase</li>
+        <li>Integration aller 30 Spieler: niemand bleibt dauerhaft außen vor</li>
+        <li>Übergang E-Jugend vorbereiten (ältere Spieler)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-title">Phasenblöcke Rückrunde</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--violet)"></div>
+      <div class="tl-content">
+        <h4>Aufbaublock nach Pause (W28–30 · Jan 2027)</h4>
+        <div class="tl-date">ca. 11.–29. Januar 2027</div>
+        <p>Schonende Reaktivierung. Fitness-Rückkehr-Test. Taktik-Wiederholung. Psychologischer Neustart nach Pause. Keine Überlastung – Körper braucht 2 Wochen zur Anpassung.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--violet)"></div>
+      <div class="tl-content">
+        <h4>Leistungspeak-Block (W31–37 · Feb–März 2027)</h4>
+        <div class="tl-date">ca. 1. Feb – 19. März 2027</div>
+        <p>Höchste Trainingsintensität der Saison. Neue offensive 1:5-Varianten einführen (z.B. aggressivere Vorwärtsbewegung aller 5 als Überraschungselement). Drucksituationen systematisch trainieren. Spielzeit-Rotation optimieren.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--violet)"></div>
+      <div class="tl-content">
+        <h4>Stabilisierungs-Block (W38–41 · März–April 2027)</h4>
+        <div class="tl-date">ca. 22. März – 16. April 2027</div>
+        <p>Intensität leicht reduzieren. Qualität vor Quantität. Verletzungsprävention. Alle 30 Spieler bekommen gleiche Spielzeit. Persönliche Stärken herausarbeiten und einsetzen.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--orange)"></div>
+      <div class="tl-content">
+        <h4>Saisonfinale (W42–44 · April–Mai 2027)</h4>
+        <div class="tl-date">ca. 20. April – 15. Mai 2027</div>
+        <p>Letzte 3 Trainingswochen: Spielfreude in den Vordergrund. Diagnose W1 vs. W44 – alle Spieler sehen ihre Gesamtentwicklung. Saisonabschlussfeier planen. Übergang in neue Saison vorbereiten.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-title">Trainingsstruktur Rückrunde (Musterwoche)</div>
+  <table class="structure-table">
+    <thead><tr><th>Block</th><th>Training 1</th><th>Training 2</th></tr></thead>
+    <tbody>
+      <tr><td>Aufwärmen (15')</td><td>Spieler leiten Aufwärmen selbst (Rotation)</td><td>Handball-spezifisches Aufwärmen mit Ball</td></tr>
+      <tr><td>Hauptteil 1 (20')</td><td>Analyse letztes Spiel + Schwachstellen-Drill</td><td>Positionsspezifisches Technik-Training</td></tr>
+      <tr><td>Hauptteil 2 (30')</td><td>Taktik nächstes Spiel / gegnerorientiert</td><td>Freie Spielform 5:5 oder 6:6</td></tr>
+      <tr><td>Kondition (15')</td><td>Spielnahe Kondition: Sprints, Reaktion</td><td>Kraft-Zirkel oder Spielform-Kondition</td></tr>
+      <tr><td>Cool-down (10')</td><td>Video/Analyse-Gespräch (kurz)</td><td>Dehnen + Saisonreflexion (ab W40)</td></tr>
+    </tbody>
+  </table>
+  <div class="hinweis" style="margin-top:1rem"><strong>Saisonabschluss-Diagnose (W44):</strong> Exakt dieselben 4 Stationen wie Woche 1 (Mai 2026). Jeder Spieler erhält seinen persönlichen Jahresvergleich. Das ist die stärkste Motivationsstrategie für die nächste Saison – sichtbarer, messbarer Fortschritt über 12 Monate.</div>
+</section>
+
+</main>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('main > section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.nav-item, .phase-overview-item').forEach(n=>n.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.style.display='block';
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
